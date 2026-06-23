@@ -81,6 +81,9 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 // Routes
 app.use("/announcements", announcementsRouter);
 
+app.get("/", (req, res) => {
+  res.redirect("/api-docs");
+});
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });

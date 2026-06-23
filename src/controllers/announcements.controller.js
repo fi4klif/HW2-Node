@@ -14,7 +14,6 @@ export const getAnnouncements = async (req, res, next) => {
   if (search && search.trim()) {
     where.title = {
       contains: search,
-      mode: "insensitive",
     };
   }
 
