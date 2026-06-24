@@ -2,16 +2,21 @@ import "dotenv/config.js";
 import express from "express";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import { isCelebrateError } from "celebrate";
+import celebratePkg from "celebrate";
+import cookieParser from "cookie-parser";
 import announcementsRouter from "./src/routes/announcements.routes.js";
+import authRouter from "./src/routes/auth.routes.js";
 
+const { isCelebrateError } = celebratePkg;
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
+app.use("/announcements", announcementsRouter);
+app.use("/auth", authRouter);
 // Swagger configuration
 const swaggerOptions = {
   definition: {
@@ -28,6 +33,14 @@ const swaggerOptions = {
       },
     ],
     components: {
+      // ОСЬ ТУТ має бути securitySchemes (на рівні з schemas)
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
       schemas: {
         Announcement: {
           type: "object",
@@ -89,7 +102,6 @@ app.use((req, res) => {
   res.status(404).json({ error: "Route not found" });
 });
 
-// Global error handler
 app.use((error, req, res, next) => {
   // Celebrate validation errors
   if (isCelebrateError(error)) {
@@ -108,6 +120,10 @@ app.use((error, req, res, next) => {
   // Prisma validation errors
   if (error.code === "P2003" || error.code === "P2014") {
     return res.status(400).json({ error: error.message });
+  }
+
+  if (error.status) {
+    return res.status(error.status).json({ error: error.message });
   }
 
   // Generic error

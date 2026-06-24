@@ -9,16 +9,24 @@
     "dev": "node --watch app.js",
     "prisma:migrate": "prisma migrate dev"
   },
-  "keywords": ["bulletin", "announcements"],
+  "keywords": [
+    "bulletin",
+    "announcements"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.7.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "celebrate": "^12.1.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.3.1",
     "express": "^5.0.0-beta.1",
-    "celebrate": "^15.0.1",
-    "swagger-ui-express": "^4.6.3",
+    "http-errors": "^2.0.1",
+    "jsonwebtoken": "^9.0.3",
     "swagger-jsdoc": "^6.2.8",
-    "dotenv": "^16.3.1"
+    "swagger-ui-express": "^4.6.3"
   },
   "devDependencies": {
     "prisma": "^5.7.0"

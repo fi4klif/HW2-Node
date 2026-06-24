@@ -135,3 +135,58 @@ DELETE {{baseUrl}}/announcements/2
 
 ### 19. Delete a non-existent announcement
 DELETE {{baseUrl}}/announcements/99999
+
+### ========================================
+### AUTHENTICATION API
+### ========================================
+
+### 20. Register a new user
+POST {{baseUrl}}/auth/register
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "password123",
+  "name": "Test User"
+}
+
+### 21. Login (generates tokens)
+# @name loginUser
+POST {{baseUrl}}/auth/login
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+### Збереження токена у змінну (для зручності в VS Code)
+@token = {{loginUser.response.body.accessToken}}
+
+### 22. Get Current User Profile (Requires Auth)
+GET {{baseUrl}}/auth/me
+Authorization: Bearer {{token}}
+
+### 23. Refresh Token
+POST {{baseUrl}}/auth/refresh
+
+### 24. Logout
+POST {{baseUrl}}/auth/logout
+
+
+### ========================================
+### PROTECTED ANNOUNCEMENTS (Requires Auth)
+### ========================================
+
+### 25. Create announcement WITH Auth
+POST {{baseUrl}}/announcements
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "title": "Телефон Samsung Galaxy",
+  "description": "Чудовий телефон, користувався 1 рік, є подряпини",
+  "price": 8500,
+  "category": "sale",
+  "contactInfo": "0990001122"
+}

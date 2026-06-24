@@ -11,6 +11,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id           Int            @id @default(autoincrement())
+  username     String         @unique
+  password     String
+  name         String
+  createdAt    DateTime       @default(now())
+  announcements Announcement[]
+  refreshTokens RefreshToken[]
+}
+
+model RefreshToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
 model Announcement {
   id          Int      @id @default(autoincrement())
   title       String
@@ -19,5 +37,8 @@ model Announcement {
   category    String   // 'sale', 'service', 'job', 'other'
   contactInfo String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime @default(now()) @updatedAt
+  updatedAt   DateTime @updatedAt
+  userId      Int
+  author      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+
