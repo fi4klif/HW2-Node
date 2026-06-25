@@ -1,36 +1,52 @@
 import { Router } from "express";
 import {
-  getAnnouncements,
-  getAnnouncementById,
-  createAnnouncement,
-  updateAnnouncement,
-  deleteAnnouncement,
-} from "../controllers/announcements.controller.js";
+  register,
+  login,
+  refresh,
+  logout,
+  getMe,
+} from "../controllers/auth.controller.js";
 import {
-  getAnnouncementsValidator,
-  getAnnouncementByIdValidator,
-  createAnnouncementValidator,
-  updateAnnouncementValidator,
-  deleteAnnouncementValidator,
-} from "../validators/announcements.validator.js";
+  registerValidator,
+  loginValidator,
+} from "../validators/auth.validator.js";
 import { authenticate } from "../middleware/auth.middleware.js";
 
 const router = Router();
 
-router.get("/", getAnnouncementsValidator, getAnnouncements);
-router.get("/:id", getAnnouncementByIdValidator, getAnnouncementById);
-router.post("/", authenticate, createAnnouncementValidator, createAnnouncement);
-router.patch(
-  "/:id",
-  authenticate,
-  updateAnnouncementValidator,
-  updateAnnouncement,
-);
-router.delete(
-  "/:id",
-  authenticate,
-  deleteAnnouncementValidator,
-  deleteAnnouncement,
-);
+/**
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     responses:
+ *      201:
+ *   description: User created
+ */
+router.post("/register", registerValidator, register);
 
-export default router;
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Login user
+ *     responses:
+ *       200:
+ *   description: Login successful
+ */
+router.post("/login", loginValidator, login);
+
+router.post("/refresh", refresh);
+router.post("/logout", logout);
+
+/**
+ * @swagger
+ * /auth/me:
+ *   get:
+ *     summary: Get current user profile
+ *   security:
+ *     - bearerAuth: []
+ */
+router.get("/me", authenticate, getMe);
+
+export default router; // ЦЕЙ РЯДОК ВИПРАВЛЯЄ ВАШУ ПОМИЛКУ

@@ -33,7 +33,6 @@ const swaggerOptions = {
       },
     ],
     components: {
-      // ОСЬ ТУТ має бути securitySchemes (на рівні з schemas)
       securitySchemes: {
         bearerAuth: {
           type: "http",
