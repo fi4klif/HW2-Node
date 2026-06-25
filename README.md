@@ -1,7 +1,9 @@
-Announcement Board REST API
+# Announcement Board REST API
+
 A secure, JSON-based REST API for an announcement board. Built with Node.js, Express, and Prisma, featuring JWT authentication and strict data ownership validation.
 
-✨ Features
+## ✨ Features
+
 JWT Authentication: Secure login with short-lived Access tokens and rotated Refresh tokens (HttpOnly cookies).
 
 Data Ownership: Users can only update or delete their own announcements.
@@ -12,7 +14,8 @@ Validation: Strict payload validation using celebrate (Joi).
 
 API Docs: Interactive Swagger UI documentation.
 
-🛠 Tech Stack
+## 🛠 Tech Stack
+
 Backend: Node.js, Express 5
 
 Database: SQLite, Prisma ORM
@@ -21,13 +24,15 @@ Security: jsonwebtoken, bcrypt
 
 Validation & Docs: celebrate (Joi), swagger-ui-express
 
-🚀 Getting Started
+## 🚀 Getting Started
+
 Prerequisites
 Node.js (v18+)
 
 npm
 
-Installation
+## Installation
+
 Clone the repository and navigate to the project folder:
 
 Bash
@@ -39,11 +44,13 @@ Bash
 npm install
 Create a .env file in the root directory and add your variables:
 
-Фрагмент коду
+```
 PORT=3000
 DATABASE_URL="file:./dev.db"
 JWT_SECRET="your_access_secret"
 JWT_REFRESH_SECRET="your_refresh_secret"
+```
+
 Run database migrations:
 
 Bash
@@ -54,10 +61,12 @@ Bash
 npm run dev
 The server will start on http://localhost:3000 and redirect to the Swagger API docs.
 
-Дошка оголошень REST API
+# Дошка оголошень REST API
+
 Захищений REST API для дошки оголошень. Побудований на Node.js, Express та Prisma з підтримкою JWT-автентифікації та суворим контролем прав власності на дані.
 
-✨ Функціонал
+## ✨ Функціонал
+
 JWT Автентифікація: Безпечний вхід через Access-токени та ротацію Refresh-токенів (HttpOnly cookies).
 
 Концепція власності (Ownership): Користувачі можуть оновлювати або видаляти лише власні оголошення.
@@ -68,7 +77,8 @@ JWT Автентифікація: Безпечний вхід через Access-
 
 Документація: Інтерактивна документація через Swagger UI.
 
-🛠 Технології
+## 🛠 Технології
+
 Бекенд: Node.js, Express 5
 
 База даних: SQLite, Prisma ORM
@@ -77,13 +87,15 @@ JWT Автентифікація: Безпечний вхід через Access-
 
 Валідація та Документація: celebrate (Joi), swagger-ui-express
 
-🚀 Запуск проекту
+## 🚀 Запуск проекту
+
 Вимоги
 Node.js (v18+)
 
 npm
 
-Встановлення
+## Встановлення
+
 Клонуйте репозиторій та перейдіть у папку проекту:
 
 Bash
@@ -95,11 +107,13 @@ Bash
 npm install
 Створіть файл .env у корені проекту та додайте змінні:
 
-Фрагмент коду
+```
 PORT=3000
 DATABASE_URL="file:./dev.db"
 JWT_SECRET="your_access_secret"
 JWT_REFRESH_SECRET="your_refresh_secret"
+```
+
 Виконайте міграції бази даних:
 
 Bash
